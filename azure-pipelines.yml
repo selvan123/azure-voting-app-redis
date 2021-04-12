@@ -69,7 +69,7 @@ stages:
              displayName: Deploy to Kubernetes cluster
              inputs:
                 action: deploy
-                kubernetesServiceConnection: K8s-selvanaks-default-1618203105101
+                #kubernetesServiceConnection: K8s-selvanaks-default-1618203105101
                 #namespace: $(k8sNamespace)
                 manifests: $(System.ArtifactsDirectory)/drop/azure-vote-all-in-one-redis.yaml
                 #imagePullSecrets: $(imagePullSecret)
