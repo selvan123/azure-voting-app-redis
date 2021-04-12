@@ -32,7 +32,7 @@ stages:
   jobs:
   - deployment: deploy
     displayName: Deploy
-    environment:  k8s
+    environment:  K8s
     strategy: 
       runOnce:
         deploy:
