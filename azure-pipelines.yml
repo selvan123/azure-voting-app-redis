@@ -32,14 +32,16 @@ stages:
   jobs:
   - deployment: deploy
     displayName: Deploy
-    environment:  xyz
+    environment: 'smarthotel-dev.bookings'
     strategy: 
       runOnce:
         deploy:
-          steps: 
+          steps:
           - task: KubernetesManifest@0
+            displayName: Deploy to Kubernetes cluster
             inputs:
-              action: 'deploy'
-              manifests: azure-vote-all-in-one-redis.yaml
-
-
+              action: deploy
+              #namespace: $(k8sNamespace)
+              manifests: $(System.ArtifactsDirectory)/**/azure-vote-all-in-one-redis.yaml
+              #imagePullSecrets: $(imagePullSecret)
+              #containers: $(containerRegistry)/$(imageRepository):$(tag)
