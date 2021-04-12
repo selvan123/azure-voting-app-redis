@@ -27,3 +27,10 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/azure-vote/Dockerfile'
         tags: |
           $(tag)
+    - task: DockerCompose@0
+      inputs:
+        containerregistrytype: 'Azure Container Registry'
+        azureSubscription: 'AzurePipeline'
+        azureContainerRegistry: '{"loginServer":"selvanregistry.azurecr.io", "id" : "/subscriptions/8dd549a5-a0ea-4590-8c78-d22e3a52b273/resourceGroups/testrg/providers/Microsoft.ContainerRegistry/registries/selvanregistry"}'
+        dockerComposeFile: '**/docker-compose.yml'
+        action: 'Run a Docker Compose command'
