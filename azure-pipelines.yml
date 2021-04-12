@@ -44,7 +44,7 @@ stages:
   jobs:
   - deployment: deploy
     displayName: Deploy
-    environment: 'kubernetesQA'
+    environment: 'smarthotel-dev'
     strategy: 
       runOnce:
         deploy:
