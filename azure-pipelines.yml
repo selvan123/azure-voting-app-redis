@@ -12,7 +12,7 @@ variables:
   tag: '$(Build.BuildId)'
 
 stages:
-- stage: Build
+- stage: CI
   displayName: Build image
   jobs:
   - job: Build
@@ -26,4 +26,20 @@ stages:
         repository: 'selvanregistry'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
-    
+- stage: CD
+  displayName: CD Stage
+  dependsOn: CI
+  jobs:
+  - deployment: deploy
+    displayName: Deploy
+    environment:  k8s
+    strategy: 
+      runOnce:
+        deploy:
+          steps: 
+          - task: KubernetesManifest@0
+            inputs:
+              action: 'deploy'
+              manifests: azure-vote-all-in-one-redis.yaml
+
+
