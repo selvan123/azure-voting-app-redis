@@ -49,6 +49,14 @@ stages:
       runOnce:
         deploy:
           steps:
+           - task: DownloadBuildArtifacts@0
+             displayName: 'Download the build artifacts'
+             inputs:
+                  buildType: 'current'
+                  downloadType: 'single'
+                  artifactName: 'drop'
+                  downloadPath: '$(System.DefaultWorkingDirectory)'
+
            - task: Bash@3
              inputs:
                 targetType: 'inline'
