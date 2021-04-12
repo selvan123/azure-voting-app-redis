@@ -62,6 +62,7 @@ stages:
                 targetType: 'inline'
                 script: |
                   pwd
+                  cd drop
                   ls -a
 
            - task: KubernetesManifest@0
@@ -70,6 +71,6 @@ stages:
                 action: deploy
                 kubernetesServiceConnection: K8s-selvanaks-default-1618203105101
                 #namespace: $(k8sNamespace)
-                manifests: azure-vote-all-in-one-redis.yaml
+                manifests: $(System.DefaultWorkingDirectory)/drop/azure-vote-all-in-one-redis.yaml
                 #imagePullSecrets: $(imagePullSecret)
                 #containers: $(containerRegistry)/$(imageRepository):$(tag)
