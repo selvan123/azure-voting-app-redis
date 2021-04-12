@@ -26,6 +26,18 @@ stages:
         repository: 'selvanregistry'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
+    
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          pwd
+          ls -a
 - stage: CD
   displayName: CD Stage
   dependsOn: CI
