@@ -32,7 +32,7 @@ stages:
   jobs:
   - deployment: deploy
     displayName: Deploy
-    environment: 'smarthotel-dev.bookings'
+    environment: 'kubernetesQA'
     strategy: 
       runOnce:
         deploy:
