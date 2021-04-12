@@ -29,7 +29,7 @@ stages:
     - task: PublishBuildArtifacts@1
       displayName: Publish package ready for deployment
       inputs:
-        PathtoPublish: '$(System.DefaultWorkingDirectory)/azure-vote-all-in-one-redis.yaml'
+        PathtoPublish: '$(System.ArtifactsDirectory)/azure-vote-all-in-one-redis.yaml'
         artifactName: 'drop'
     
     - task: Bash@3
@@ -55,7 +55,7 @@ stages:
                   buildType: 'current'
                   downloadType: 'single'
                   artifactName: 'drop'
-                  downloadPath: '$(System.DefaultWorkingDirectory)'
+                  downloadPath: '$(System.ArtifactsDirectory)'
 
            - task: Bash@3
              inputs:
@@ -71,6 +71,6 @@ stages:
                 action: deploy
                 kubernetesServiceConnection: K8s-selvanaks-default-1618203105101
                 #namespace: $(k8sNamespace)
-                manifests: $(System.DefaultWorkingDirectory)/drop/azure-vote-all-in-one-redis.yaml
+                manifests: $(System.ArtifactsDirectory)/drop/azure-vote-all-in-one-redis.yaml
                 #imagePullSecrets: $(imagePullSecret)
                 #containers: $(containerRegistry)/$(imageRepository):$(tag)
